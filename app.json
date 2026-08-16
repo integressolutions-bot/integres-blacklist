@@ -24,7 +24,11 @@
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "package": "com.integres.integresblacklist"
+      "package": "com.integres.integresblacklist",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "plugins": [
       "expo-document-picker",
@@ -34,14 +38,15 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "REPLACE_WITH_YOUR_EXISTING_EAS_PROJECT_ID"
+        "projectId": "91b769e1-e8fc-4e2a-94ee-252a742fe948"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/91b769e1-e8fc-4e2a-94ee-252a742fe948"
     }
   }
 }

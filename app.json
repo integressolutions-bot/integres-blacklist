@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Integres Risk Review",
+    "slug": "integres-blacklist",
+    "scheme": "integresblacklist",
+    "version": "1.2.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.integres.integresblacklist",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Select evidence you choose to submit for a confidential report or dispute."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.integres.integresblacklist"
+    },
+    "plugins": [
+      "expo-document-picker",
+      "expo-image-picker",
+      "expo-secure-store",
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "REPLACE_WITH_YOUR_EXISTING_EAS_PROJECT_ID"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    }
+  }
+}

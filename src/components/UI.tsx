@@ -1,0 +1,8 @@
+import React from 'react'; import {Pressable,StyleSheet,Text,TextInput,View} from 'react-native'; import {colors} from '../theme';
+export const Screen=({children}:{children:React.ReactNode})=><View style={s.screen}>{children}</View>;
+export const Card=({children}:{children:React.ReactNode})=><View style={s.card}>{children}</View>;
+export const H=({children}:{children:React.ReactNode})=><Text style={s.h}>{children}</Text>;
+export const P=({children}:{children:React.ReactNode})=><Text style={s.p}>{children}</Text>;
+export const Field=(p:any)=><TextInput placeholderTextColor="#98A2B3" {...p} style={[s.input,p.style]} />;
+export const Button=({title,onPress,kind='primary',disabled=false}:{title:string;onPress:()=>void;kind?:'primary'|'secondary'|'danger';disabled?:boolean})=><Pressable disabled={disabled} onPress={onPress} style={[s.btn,kind==='secondary'&&s.secondary,kind==='danger'&&s.danger,disabled&&{opacity:.5}]}><Text style={[s.bt,kind==='secondary'&&{color:colors.brand}]}>{title}</Text></Pressable>;
+const s=StyleSheet.create({screen:{flex:1,backgroundColor:colors.bg,padding:18,gap:14},card:{backgroundColor:colors.card,borderWidth:1,borderColor:colors.line,borderRadius:16,padding:16,gap:10},h:{fontSize:24,fontWeight:'800',color:colors.ink},p:{fontSize:14,lineHeight:21,color:colors.muted},input:{borderWidth:1,borderColor:colors.line,borderRadius:12,padding:13,color:colors.ink,backgroundColor:'#fff'},btn:{padding:14,borderRadius:12,backgroundColor:colors.brand,alignItems:'center'},secondary:{backgroundColor:'#fff',borderWidth:1,borderColor:colors.brand},danger:{backgroundColor:colors.danger},bt:{color:'#fff',fontWeight:'800'}});

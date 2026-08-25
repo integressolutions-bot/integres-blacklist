@@ -1,4 +1,25 @@
-import React,{createContext,useContext,useEffect,useState} from 'react'; import {authApi,tokenStore} from '../api/client';
-type C={user:any|null;loading:boolean;login:(e:string,p:string)=>Promise<void>;register:(x:any)=>Promise<void>;logout:()=>Promise<void>}; const X=createContext<C>({} as C);
-export function AuthProvider({children}:{children:React.ReactNode}){const[user,setUser]=useState<any|null>(null);const[loading,setLoading]=useState(true);useEffect(()=>{(async()=>{try{if(await tokenStore.get())setUser(await authApi.profile())}catch{await tokenStore.clear()}finally{setLoading(false)}})()},[]);
-const login=async(e:string,p:string)=>{const d=await authApi.login(e,p);await tokenStore.set(d.token);setUser(d.user||await authApi.profile())}; const register=async(x:any)=>{const d=await authApi.register(x);if(d.token){await tokenStore.set(d.token);setUser(d.user||await authApi.profile())}}; const logout=async()=>{await tokenStore.clear();setUser(null)}; return <X.Provider value={{user,loading,login,register,logout}}>{children}</X.Provider>}; export const useAuth=()=>useContext(X);
+import React,{createContext,useContext,useEffect,useState} from 'react';
+import {authApi,tokenStore} from '../api/client';
+type C={user:any|null;loading:boolean;login:(e:string,p:string)=>Promise<void>;loginWithGoogle:(idToken:string)=>Promise<void>;register:(x:any)=>Promise<void>;logout:()=>Promise<void>};
+const X=createContext<C>({} as C);
+
+export function AuthProvider({children}:{children:React.ReactNode}){
+  const[user,setUser]=useState<any|null>(null);
+  const[loading,setLoading]=useState(true);
+
+  useEffect(()=>{(async()=>{try{if(await tokenStore.get())setUser(await authApi.profile())}catch{await tokenStore.clear()}finally{setLoading(false)}})()},[]);
+
+  const establish=async(d:any)=>{
+    if(!d?.token)throw new Error('The server returned an incomplete sign-in response.');
+    await tokenStore.set(d.token);
+    setUser(d.user||await authApi.profile());
+  };
+
+  const login=async(e:string,p:string)=>{await establish(await authApi.login(e,p))};
+  const loginWithGoogle=async(idToken:string)=>{await establish(await authApi.google(idToken))};
+  const register=async(x:any)=>{const d=await authApi.register(x);if(d.token)await establish(d)};
+  const logout=async()=>{await tokenStore.clear();setUser(null)};
+
+  return <X.Provider value={{user,loading,login,loginWithGoogle,register,logout}}>{children}</X.Provider>;
+}
+export const useAuth=()=>useContext(X);

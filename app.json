@@ -1,27 +1,29 @@
 {
   "expo": {
-    "name": "Integres Risk Review",
+    "name": "Integres Blacklist",
     "slug": "integres-blacklist",
     "scheme": "integresblacklist",
     "version": "1.2.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.integres.integresblacklist",
+      "icon": "./assets/icon.png",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Select evidence you choose to submit for a confidential report or dispute."
       }
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.integres.integresblacklist",
@@ -34,16 +36,15 @@
       "expo-document-picker",
       "expo-image-picker",
       "expo-secure-store",
-      "expo-font"
+      "expo-font",
+      "@react-native-google-signin/google-signin"
     ],
     "extra": {
       "eas": {
         "projectId": "91b769e1-e8fc-4e2a-94ee-252a742fe948"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": {"policy": "appVersion"},
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/91b769e1-e8fc-4e2a-94ee-252a742fe948"

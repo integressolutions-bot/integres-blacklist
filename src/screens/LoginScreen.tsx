@@ -4,10 +4,8 @@ import {GoogleSignin,statusCodes} from '@react-native-google-signin/google-signi
 import {Button,Card,Field,H,P,Screen} from '../components/UI';
 import {useAuth} from '../context/AuthContext';
 
-GoogleSignin.configure({
-  webClientId:'463399358521-3sti9q753ao4bpsfrar7v43ulg1mb7pj.apps.googleusercontent.com',
-  offlineAccess:false
-});
+const GOOGLE_WEB_CLIENT_ID=process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID||'';
+if(GOOGLE_WEB_CLIENT_ID)GoogleSignin.configure({webClientId:GOOGLE_WEB_CLIENT_ID,offlineAccess:false});
 
 export default function LoginScreen({navigation}:any){
   const{login,loginWithGoogle}=useAuth();
@@ -24,6 +22,7 @@ export default function LoginScreen({navigation}:any){
   const google=async()=>{
     try{
       setBusy('google');
+      if(!GOOGLE_WEB_CLIENT_ID)throw new Error('Google Sign-In is not configured for this build. Use email sign-in or configure EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID.');
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog:true});
       const response:any=await GoogleSignin.signIn();
       const idToken=response?.data?.idToken??response?.idToken;
